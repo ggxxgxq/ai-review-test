@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-angular-app';
+
+  // tslint:disable-next-line:typedef
+  testCode() {
+    console.log('testCode');
+  }
 }
