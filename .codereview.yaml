@@ -48,5 +48,5 @@ trigger:
 # 参考信息配置 - 支持内部文件和外部URL
 references:
   # HTML网页 - 自动解析为纯文本
-  - url: "https://pingcode.com/pages/v0l04sEelSx/child/o17ynh"
+  - url: "https://blog.csdn.net/weixin_50736522/article/details/153076305"
     description: "在线编码标准文档"
