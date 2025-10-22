@@ -48,8 +48,8 @@ trigger:
 # 参考信息配置 - 支持内部文件和外部URL
 references:
   # 内部文件路径
-  # - path: "./code-style.md"
-  #   description: "代码风格规范文档"
+  - path: "./code-style.md"
+    description: "代码风格规范文档"
 
   # 外部URL
   - url: "https://rc.pcx.cc/g/lvu4sF?# 《前端代码编程规范》"
