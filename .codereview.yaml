@@ -48,29 +48,29 @@ trigger:
 # 参考信息配置 - 支持内部文件和外部URL
 references:
   # Markdown文件 - 自动解析为纯文本
-  - path: "./docs/code-style.md"
+  - path: "docs/code-style.md"
     description: "代码风格规范文档"
 
-  # - path: "./docs/security-guidelines.md"
+  # - path: "docs/security-guidelines.md"
   #   description: "安全开发指南"
 
-  # - path: "./docs/api-design.md"
+  # - path: "docs/api-design.md"
   #   description: "API设计规范"
 
   # # HTML文件 - 自动解析为纯文本
-  # - path: "./docs/code-review-guidelines.html"
+  # - path: "docs/code-review-guidelines.html"
   #   description: "代码审查规范HTML文档"
 
   # # 纯文本文件 - 自动清理格式
-  # - path: "./docs/development-guidelines.txt"
+  # - path: "docs/development-guidelines.txt"
   #   description: "开发指南纯文本文档"
 
   # # JSON配置文件 - 自动解析为纯文本
-  # - path: "./docs/coding-rules.json"
+  # - path: "docs/coding-rules.json"
   #   description: "编码规则配置文件"
 
   # # YAML配置文件 - 自动解析为纯文本
-  # - path: "./docs/project-standards.yml"
+  # - path: "docs/project-standards.yml"
   #   description: "项目标准配置文件"
 
   # # HTML网页 - 自动解析为纯文本
