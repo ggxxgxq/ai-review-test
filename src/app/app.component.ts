@@ -13,4 +13,8 @@ export class AppComponent {
   testCode() {
     console.log('testCode');
   }
+  // tslint:disable-next-line:typedef
+  testCode2() {
+    console.log('testCode2');
+  }
 }
