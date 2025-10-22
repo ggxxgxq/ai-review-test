@@ -74,7 +74,7 @@ codeStandards:
 
     # 从仓库文件加载
     - type: "file"
-      path: "./code-standards.yaml"
+      path: "./docs/code-standards.yaml"
       format: "yaml"
       priority: 2
 
@@ -86,6 +86,6 @@ codeStandards:
 
     # 从Markdown文档加载
     - type: "file"
-      path: "./code-style.md"
+      path: "./docs/code-style.md"
       format: "markdown"
       priority: 4
