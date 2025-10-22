@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码审查规范指南</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+        }
+        .rule {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .good {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .bad {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        code {
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+        pre {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        .checklist {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .checklist ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .checklist li {
+            margin: 5px 0;
+        }
+        .priority {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .high {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .medium {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+        .low {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>代码审查规范指南</h1>
+        
+        <h2>1. 代码审查目标</h2>
+        <div class="rule">
+            <h3>主要目标</h3>
+            <ul>
+                <li><strong>代码质量提升</strong>：确保代码符合项目标准和最佳实践</li>
+                <li><strong>知识共享</strong>：团队成员相互学习，提高整体技术水平</li>
+                <li><strong>缺陷发现</strong>：在代码合并前发现潜在问题和 bug</li>
+                <li><strong>架构一致性</strong>：确保代码架构和设计模式的一致性</li>
+                <li><strong>安全性检查</strong>：识别安全漏洞和风险点</li>
+            </ul>
+        </div>
+
+        <h2>2. 审查流程规范</h2>
+        
+        <h3>2.1 提交前自检</h3>
+        <div class="rule good">
+            <h4>✅ 提交前检查清单</h4>
+            <ul>
+                <li>代码编译通过，无语法错误</li>
+                <li>单元测试全部通过</li>
+                <li>代码格式化符合项目规范</li>
+                <li>提交信息清晰明确</li>
+                <li>功能测试完成</li>
+            </ul>
+        </div>
+
+        <h3>2.2 审查者选择</h3>
+        <div class="rule">
+            <h4>审查者要求</h4>
+            <ul>
+                <li><strong>技术能力</strong>：具备相关技术栈经验</li>
+                <li><strong>项目熟悉度</strong>：了解项目架构和业务逻辑</li>
+                <li><strong>时间安排</strong>：能够在 24 小时内完成审查</li>
+                <li><strong>最少审查者</strong>：至少 1 人，重要功能需要 2 人</li>
+            </ul>
+        </div>
+
+        <h3>2.3 审查时间要求</h3>
+        <div class="rule">
+            <h4>时间规范</h4>
+            <ul>
+                <li><strong>响应时间</strong>：审查者应在 4 小时内开始审查</li>
+                <li><strong>完成时间</strong>：普通 PR 应在 24 小时内完成审查</li>
+                <li><strong>紧急情况</strong>：生产问题修复应在 2 小时内完成</li>
+                <li><strong>大型变更</strong>：超过 500 行的变更可延长至 48 小时</li>
+            </ul>
+        </div>
+
+        <h2>3. 代码质量检查</h2>
+
+        <h3>3.1 功能正确性 <span class="priority high">高优先级</span></h3>
+        <div class="rule">
+            <h4>检查要点</h4>
+            <ul>
+                <li>功能实现是否符合需求</li>
+                <li>边界条件处理是否正确</li>
+                <li>异常情况处理是否完善</li>
+                <li>业务逻辑是否合理</li>
+            </ul>
+        </div>
+
+        <div class="rule good">
+            <h4>✅ 正确示例</h4>
+            <pre><code>function calculateDiscount(price: number, userType: string): number {
+  if (price <= 0) {
+    throw new Error('Price must be positive');
+  }
+  
+  if (!userType || !['premium', 'regular', 'vip'].includes(userType)) {
+    throw new Error('Invalid user type');
+  }
+  
+  const discountRates = {
+    premium: 0.15,
+    regular: 0.05,
+    vip: 0.25
+  };
+  
+  return price * discountRates[userType];
+}</code></pre>
+        </div>
+
+        <div class="rule bad">
+            <h4>❌ 错误示例</h4>
+            <pre><code>function calculateDiscount(price, userType) {
+  return price * 0.1; // 硬编码折扣率，没有验证输入
+}</code></pre>
+        </div>
+
+        <h3>3.2 代码可读性 <span class="priority medium">中优先级</span></h3>
+        <div class="rule">
+            <h4>检查要点</h4>
+            <ul>
+                <li>变量和函数命名是否清晰</li>
+                <li>代码结构是否合理</li>
+                <li>注释是否充分且准确</li>
+                <li>代码复杂度是否适中</li>
+            </ul>
+        </div>
+
+        <div class="rule good">
+            <h4>✅ 正确示例</h4>
+            <pre><code>/**
+ * 计算用户订单总金额
+ * @param items 订单商品列表
+ * @param discountRate 折扣率 (0-1)
+ * @returns 计算后的总金额
+ */
+function calculateOrderTotal(items: OrderItem[], discountRate: number): number {
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const discount = subtotal * discountRate;
+  return subtotal - discount;
+}</code></pre>
+        </div>
+
+        <div class="rule bad">
+            <h4>❌ 错误示例</h4>
+            <pre><code>function calc(a, b, c) {
+  return a.reduce((x, y) => x + y.price * y.qty, 0) - a.reduce((x, y) => x + y.price * y.qty, 0) * b;
+}</code></pre>
+        </div>
+
+        <h3>3.3 性能优化 <span class="priority medium">中优先级</span></h3>
+        <div class="rule">
+            <h4>检查要点</h4>
+            <ul>
+                <li>是否存在性能瓶颈</li>
+                <li>数据库查询是否优化</li>
+                <li>内存使用是否合理</li>
+                <li>算法复杂度是否可接受</li>
+            </ul>
+        </div>
+
+        <div class="rule good">
+            <h4>✅ 正确示例</h4>
+            <pre><code>// 使用 Map 提高查找效率
+const userCache = new Map<string, User>();
+
+function getUserById(id: string): User | null {
+  if (userCache.has(id)) {
+    return userCache.get(id);
+  }
+  
+  const user = fetchUserFromDatabase(id);
+  if (user) {
+    userCache.set(id, user);
+  }
+  return user;
+}</code></pre>
+        </div>
+
+        <div class="rule bad">
+            <h4>❌ 错误示例</h4>
+            <pre><code>// 每次都查询数据库
+function getUserById(id: string): User | null {
+  return fetchUserFromDatabase(id); // 没有缓存，性能差
+}</code></pre>
+        </div>
+
+        <h3>3.4 安全性检查 <span class="priority high">高优先级</span></h3>
+        <div class="rule">
+            <h4>检查要点</h4>
+            <ul>
+                <li>输入验证是否充分</li>
+                <li>SQL 注入防护</li>
+                <li>XSS 攻击防护</li>
+                <li>敏感信息泄露</li>
+                <li>权限控制是否完善</li>
+            </ul>
+        </div>
+
+        <div class="rule good">
+            <h4>✅ 正确示例</h4>
+            <pre><code>// 使用参数化查询防止 SQL 注入
+async function getUserByEmail(email: string): Promise<User | null> {
+  // 验证邮箱格式
+  if (!isValidEmail(email)) {
+    throw new Error('Invalid email format');
+  }
+  
+  const query = 'SELECT * FROM users WHERE email = ?';
+  const result = await db.query(query, [email]);
+  return result[0] || null;
+}</code></pre>
+        </div>
+
+        <div class="rule bad">
+            <h4>❌ 错误示例</h4>
+            <pre><code>// 存在 SQL 注入风险
+async function getUserByEmail(email: string): Promise<User | null> {
+  const query = `SELECT * FROM users WHERE email = '${email}'`;
+  const result = await db.query(query);
+  return result[0] || null;
+}</code></pre>
+        </div>
+
+        <h2>4. 代码风格检查</h2>
+
+        <h3>4.1 命名规范</h3>
+        <div class="rule">
+            <h4>命名要求</h4>
+            <ul>
+                <li><strong>变量</strong>：使用驼峰命名法 (camelCase)</li>
+                <li><strong>常量</strong>：使用大写下划线 (UPPER_SNAKE_CASE)</li>
+                <li><strong>函数</strong>：使用动词开头，驼峰命名法</li>
+                <li><strong>类</strong>：使用帕斯卡命名法 (PascalCase)</li>
+            </ul>
+        </div>
+
+        <div class="rule good">
+            <h4>✅ 正确示例</h4>
+            <pre><code>const MAX_RETRY_COUNT = 3;
+const API_BASE_URL = 'https://api.example.com';
+
+class UserService {
+  async getUserById(userId: string): Promise<User> {
+    const userData = await this.fetchUserData(userId);
+    return this.transformUserData(userData);
+  }
+}</code></pre>
+        </div>
+
+        <div class="rule bad">
+            <h4>❌ 错误示例</h4>
+            <pre><code>const maxRetryCount = 3; // 常量应该用大写
+const apiBaseUrl = 'https://api.example.com';
+
+class userService { // 类名应该用帕斯卡命名法
+  async getUserById(user_id: string): Promise<User> { // 参数应该用驼峰命名法
+    const user_data = await this.fetchUserData(user_id);
+    return this.transformUserData(user_data);
+  }
+}</code></pre>
+        </div>
+
+        <h3>4.2 代码格式</h3>
+        <div class="rule">
+            <h4>格式要求</h4>
+            <ul>
+                <li>使用 2 个空格缩进</li>
+                <li>运算符前后要有空格</li>
+                <li>行末不允许有空格</li>
+                <li>文件末尾必须有换行符</li>
+            </ul>
+        </div>
+
+        <h2>5. 测试覆盖检查</h2>
+
+        <h3>5.1 单元测试 <span class="priority high">高优先级</span></h3>
+        <div class="rule">
+            <h4>测试要求</h4>
+            <ul>
+                <li>新功能必须有对应的单元测试</li>
+                <li>测试覆盖率不低于 80%</li>
+                <li>测试用例要覆盖正常和异常情况</li>
+                <li>测试名称要清晰描述测试场景</li>
+            </ul>
+        </div>
+
+        <div class="rule good">
+            <h4>✅ 正确示例</h4>
+            <pre><code>describe('UserService', () => {
+  describe('getUserById', () => {
+    it('should return user when valid id is provided', async () => {
+      // Arrange
+      const userId = '123';
+      const expectedUser = { id: '123', name: 'John Doe' };
+      jest.spyOn(userService, 'fetchUserData').mockResolvedValue(expectedUser);
+      
+      // Act
+      const result = await userService.getUserById(userId);
+      
+      // Assert
+      expect(result).toEqual(expectedUser);
+      expect(userService.fetchUserData).toHaveBeenCalledWith(userId);
+    });
+    
+    it('should throw error when invalid id is provided', async () => {
+      // Arrange
+      const invalidId = '';
+      
+      // Act & Assert
+      await expect(userService.getUserById(invalidId))
+        .rejects
+        .toThrow('Invalid user ID');
+    });
+  });
+});</code></pre>
+        </div>
+
+        <h3>5.2 集成测试</h3>
+        <div class="rule">
+            <h4>集成测试要求</h4>
+            <ul>
+                <li>API 接口要有集成测试</li>
+                <li>数据库操作要有集成测试</li>
+                <li>第三方服务调用要有集成测试</li>
+                <li>测试环境要与生产环境隔离</li>
+            </ul>
+        </div>
+
+        <h2>6. 文档和注释检查</h2>
+
+        <h3>6.1 代码注释</h3>
+        <div class="rule">
+            <h4>注释要求</h4>
+            <ul>
+                <li>复杂业务逻辑必须有注释</li>
+                <li>函数要有 JSDoc 注释</li>
+                <li>注释要与代码保持同步</li>
+                <li>避免无意义的注释</li>
+            </ul>
+        </div>
+
+        <div class="rule good">
+            <h4>✅ 正确示例</h4>
+            <pre><code>/**
+ * 计算订单折扣金额
+ * @param orderTotal 订单总金额
+ * @param userLevel 用户等级 (bronze, silver, gold, platinum)
+ * @param couponCode 优惠券代码 (可选)
+ * @returns 折扣金额
+ */
+function calculateDiscount(
+  orderTotal: number, 
+  userLevel: UserLevel, 
+  couponCode?: string
+): number {
+  // 基础折扣率根据用户等级确定
+  const baseDiscountRate = getUserLevelDiscountRate(userLevel);
+  
+  // 如果有优惠券，应用额外折扣
+  const couponDiscount = couponCode ? getCouponDiscount(couponCode) : 0;
+  
+  // 计算最终折扣金额
+  return orderTotal * (baseDiscountRate + couponDiscount);
+}</code></pre>
+        </div>
+
+        <h3>6.2 API 文档</h3>
+        <div class="rule">
+            <h4>API 文档要求</h4>
+            <ul>
+                <li>新增 API 要更新文档</li>
+                <li>参数和返回值要详细说明</li>
+                <li>提供请求和响应示例</li>
+                <li>错误码要有说明</li>
+            </ul>
+        </div>
+
+        <h2>7. 审查反馈规范</h2>
+
+        <h3>7.1 反馈类型</h3>
+        <div class="rule">
+            <h4>反馈分类</h4>
+            <ul>
+                <li><strong>必须修改</strong>：影响功能、安全或性能的问题</li>
+                <li><strong>建议修改</strong>：代码质量和可维护性问题</li>
+                <li><strong>可选修改</strong>：代码风格和个人偏好问题</li>
+                <li><strong>问题讨论</strong>：需要进一步讨论的技术问题</li>
+            </ul>
+        </div>
+
+        <h3>7.2 反馈格式</h3>
+        <div class="rule">
+            <h4>反馈要求</h4>
+            <ul>
+                <li>反馈要具体明确，避免模糊表述</li>
+                <li>提供修改建议或示例代码</li>
+                <li>解释问题的原因和影响</li>
+                <li>使用礼貌和建设性的语言</li>
+            </ul>
+        </div>
+
+        <div class="rule good">
+            <h4>✅ 好的反馈示例</h4>
+            <pre><code>建议修改：这个函数缺少输入验证，可能导致运行时错误。
+
+建议添加参数验证：
+```typescript
+function processUserData(userData: any) {
+  if (!userData || typeof userData !== 'object') {
+    throw new Error('Invalid user data');
+  }
+  // ... 其他逻辑
+}
+```
+
+这样可以提高代码的健壮性，避免潜在的空指针异常。</code></pre>
+        </div>
+
+        <div class="rule bad">
+            <h4>❌ 不好的反馈示例</h4>
+            <pre><code>这个函数有问题，需要修改。
+
+代码写得不好。
+
+应该用更好的方式实现。</code></pre>
+        </div>
+
+        <h2>8. 审查检查清单</h2>
+
+        <div class="checklist">
+            <h3>功能正确性检查</h3>
+            <ul>
+                <li>□ 功能实现是否符合需求</li>
+                <li>□ 边界条件处理是否正确</li>
+                <li>□ 异常情况处理是否完善</li>
+                <li>□ 业务逻辑是否合理</li>
+                <li>□ 返回值类型是否正确</li>
+            </ul>
+        </div>
+
+        <div class="checklist">
+            <h3>代码质量检查</h3>
+            <ul>
+                <li>□ 变量和函数命名是否清晰</li>
+                <li>□ 代码结构是否合理</li>
+                <li>□ 函数长度是否适中</li>
+                <li>□ 代码复杂度是否可接受</li>
+                <li>□ 是否有重复代码</li>
+            </ul>
+        </div>
+
+        <div class="checklist">
+            <h3>安全性检查</h3>
+            <ul>
+                <li>□ 输入验证是否充分</li>
+                <li>□ 是否存在 SQL 注入风险</li>
+                <li>□ 是否存在 XSS 攻击风险</li>
+                <li>□ 敏感信息是否泄露</li>
+                <li>□ 权限控制是否完善</li>
+            </ul>
+        </div>
+
+        <div class="checklist">
+            <h3>性能检查</h3>
+            <ul>
+                <li>□ 是否存在性能瓶颈</li>
+                <li>□ 数据库查询是否优化</li>
+                <li>□ 内存使用是否合理</li>
+                <li>□ 算法复杂度是否可接受</li>
+                <li>□ 是否有不必要的循环</li>
+            </ul>
+        </div>
+
+        <div class="checklist">
+            <h3>测试检查</h3>
+            <ul>
+                <li>□ 是否有对应的单元测试</li>
+                <li>□ 测试覆盖率是否达标</li>
+                <li>□ 测试用例是否覆盖正常和异常情况</li>
+                <li>□ 测试名称是否清晰</li>
+                <li>□ 集成测试是否完整</li>
+            </ul>
+        </div>
+
+        <div class="checklist">
+            <h3>文档检查</h3>
+            <ul>
+                <li>□ 复杂逻辑是否有注释</li>
+                <li>□ 函数是否有 JSDoc 注释</li>
+                <li>□ API 文档是否更新</li>
+                <li>□ README 是否需要更新</li>
+                <li>□ 变更日志是否记录</li>
+            </ul>
+        </div>
+
+        <h2>9. 审查工具推荐</h2>
+
+        <div class="rule">
+            <h3>代码质量工具</h3>
+            <ul>
+                <li><strong>ESLint</strong>：JavaScript/TypeScript 代码检查</li>
+                <li><strong>Prettier</strong>：代码格式化</li>
+                <li><strong>SonarQube</strong>：代码质量分析</li>
+                <li><strong>CodeClimate</strong>：代码质量监控</li>
+            </ul>
+        </div>
+
+        <div class="rule">
+            <h3>安全扫描工具</h3>
+            <ul>
+                <li><strong>Snyk</strong>：依赖安全扫描</li>
+                <li><strong>OWASP ZAP</strong>：Web 应用安全测试</li>
+                <li><strong>Bandit</strong>：Python 安全扫描</li>
+                <li><strong>Semgrep</strong>：多语言安全扫描</li>
+            </ul>
+        </div>
+
+        <div class="rule">
+            <h3>测试工具</h3>
+            <ul>
+                <li><strong>Jest</strong>：JavaScript 测试框架</li>
+                <li><strong>Cypress</strong>：端到端测试</li>
+                <li><strong>Postman</strong>：API 测试</li>
+                <li><strong>Newman</strong>：Postman 自动化测试</li>
+            </ul>
+        </div>
+
+        <h2>10. 审查最佳实践</h2>
+
+        <div class="rule">
+            <h3>审查者最佳实践</h3>
+            <ul>
+                <li><strong>及时响应</strong>：在承诺时间内完成审查</li>
+                <li><strong>建设性反馈</strong>：提供具体的改进建议</li>
+                <li><strong>学习态度</strong>：保持开放和学习的心态</li>
+                <li><strong>平衡检查</strong>：既关注细节也关注整体架构</li>
+            </ul>
+        </div>
+
+        <div class="rule">
+            <h3>被审查者最佳实践</h3>
+            <ul>
+                <li><strong>充分准备</strong>：提交前进行自检</li>
+                <li><strong>积极回应</strong>：及时回复审查意见</li>
+                <li><strong>持续改进</strong>：从审查中学习和改进</li>
+                <li><strong>保持沟通</strong>：对不清楚的意见主动询问</li>
+            </ul>
+        </div>
+
+        <div class="rule">
+            <h3>团队最佳实践</h3>
+            <ul>
+                <li><strong>轮换审查</strong>：避免总是同一个人审查</li>
+                <li><strong>知识分享</strong>：定期分享审查经验和技巧</li>
+                <li><strong>工具集成</strong>：将审查工具集成到开发流程</li>
+                <li><strong>持续改进</strong>：定期回顾和优化审查流程</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
