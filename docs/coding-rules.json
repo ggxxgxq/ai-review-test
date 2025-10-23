@@ -1,0 +1,92 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2024-01-01",
+  "author": "Development Team",
+  "description": "编码规则配置文件 - 定义项目的编码标准和规则",
+  "rules": {
+    "angular": {
+      "componentStructure": {
+        "template": "inline",
+        "style": "scss",
+        "changeDetection": "OnPush",
+        "description": "组件使用内联模板，SCSS样式，OnPush变更检测"
+      },
+      "serviceInjection": {
+        "method": "constructor",
+        "description": "服务通过构造函数注入"
+      },
+      "lifecycleHooks": {
+        "required": [
+          "OnInit",
+          "OnDestroy"
+        ],
+        "description": "组件必须实现OnInit和OnDestroy生命周期钩子"
+      },
+      "routing": {
+        "lazyLoading": true,
+        "guards": "required",
+        "description": "路由使用懒加载和守卫"
+      }
+    },
+    "errorHandling": {
+      "asyncOperations": {
+        "required": true,
+        "description": "异步操作必须包含错误处理",
+        "examples": {
+          "valid": "try { const result = await operation(); } catch (error) { handleError(error); }",
+          "invalid": "const result = await operation();"
+        }
+      },
+      "promiseChains": {
+        "catchRequired": true,
+        "description": "Promise链必须包含catch处理"
+      },
+      "errorMessages": {
+        "descriptive": true,
+        "description": "错误信息必须具有描述性"
+      }
+    },
+    "security": {
+      "inputValidation": {
+        "required": true,
+        "description": "所有用户输入都必须验证"
+      },
+      "sqlInjection": {
+        "prevention": "parameterized",
+        "description": "使用参数化查询防止SQL注入"
+      },
+      "xssProtection": {
+        "encoding": true,
+        "description": "输出数据必须进行编码"
+      },
+      "authentication": {
+        "method": "JWT",
+        "description": "使用JWT进行身份认证"
+      },
+      "authorization": {
+        "required": true,
+        "description": "敏感操作必须进行权限验证"
+      }
+    },
+    "performance": {
+      "bundleSize": {
+        "max": "2MB",
+        "description": "打包文件最大2MB"
+      },
+      "loadTime": {
+        "max": "3s",
+        "description": "首屏加载时间最大3秒"
+      },
+      "memoryUsage": {
+        "monitoring": true,
+        "description": "监控内存使用情况"
+      },
+      "optimization": {
+        "lazyLoading": true,
+        "treeShaking": true,
+        "compression": true,
+        "description": "启用懒加载、摇树优化和压缩"
+      }
+    }
+  }
+}
