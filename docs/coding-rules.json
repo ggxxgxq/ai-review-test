@@ -1,0 +1,387 @@
+{
+    "version": "1.0.0",
+    "lastUpdated": "2024-01-01",
+    "author": "Development Team",
+    "description": "编码规则配置文件 - 定义项目的编码标准和规则",
+    "rules": {
+        "naming": {
+            "variables": {
+                "pattern": "camelCase",
+                "description": "变量名使用驼峰命名法",
+                "examples": {
+                    "valid": [
+                        "userName",
+                        "userAge",
+                        "isUserActive"
+                    ],
+                    "invalid": [
+                        "user_name",
+                        "user-age",
+                        "UserAge"
+                    ]
+                }
+            },
+            "constants": {
+                "pattern": "UPPER_SNAKE_CASE",
+                "description": "常量名使用大写下划线分隔",
+                "examples": {
+                    "valid": [
+                        "MAX_RETRY_COUNT",
+                        "API_BASE_URL",
+                        "DEFAULT_TIMEOUT"
+                    ],
+                    "invalid": [
+                        "maxRetryCount",
+                        "apiBaseUrl",
+                        "defaultTimeout"
+                    ]
+                }
+            },
+            "functions": {
+                "pattern": "camelCase",
+                "prefix": "verb",
+                "description": "函数名使用动词开头，驼峰命名法",
+                "examples": {
+                    "valid": [
+                        "getUserData",
+                        "validateEmail",
+                        "processPayment"
+                    ],
+                    "invalid": [
+                        "userData",
+                        "email",
+                        "payment"
+                    ]
+                }
+            },
+            "classes": {
+                "pattern": "PascalCase",
+                "description": "类名使用帕斯卡命名法",
+                "examples": {
+                    "valid": [
+                        "UserService",
+                        "PaymentProcessor",
+                        "EmailValidator"
+                    ],
+                    "invalid": [
+                        "userService",
+                        "paymentProcessor",
+                        "emailValidator"
+                    ]
+                }
+            },
+            "interfaces": {
+                "pattern": "PascalCase",
+                "prefix": "I",
+                "description": "接口名使用帕斯卡命名法，以I开头",
+                "examples": {
+                    "valid": [
+                        "IUserService",
+                        "IPaymentProcessor",
+                        "IEmailValidator"
+                    ],
+                    "invalid": [
+                        "UserService",
+                        "userService",
+                        "IuserService"
+                    ]
+                }
+            },
+            "files": {
+                "components": "PascalCase.component.ts",
+                "services": "kebab-case.service.ts",
+                "utils": "kebab-case.util.ts",
+                "models": "kebab-case.model.ts",
+                "styles": "kebab-case.scss"
+            }
+        },
+        "formatting": {
+            "indentation": {
+                "type": "spaces",
+                "size": 2,
+                "description": "使用2个空格缩进"
+            },
+            "lineLength": {
+                "max": 120,
+                "description": "每行最大长度120字符"
+            },
+            "trailingWhitespace": {
+                "allowed": false,
+                "description": "行末不允许有空格"
+            },
+            "finalNewline": {
+                "required": true,
+                "description": "文件末尾必须有换行符"
+            },
+            "quotes": {
+                "preferred": "single",
+                "description": "优先使用单引号"
+            },
+            "semicolons": {
+                "required": true,
+                "description": "语句末尾必须有分号"
+            }
+        },
+        "typescript": {
+            "strictMode": true,
+            "noImplicitAny": true,
+            "noImplicitReturns": true,
+            "noImplicitThis": true,
+            "noUnusedLocals": true,
+            "noUnusedParameters": true,
+            "exactOptionalPropertyTypes": true,
+            "noImplicitOverride": true,
+            "noPropertyAccessFromIndexSignature": true,
+            "noUncheckedIndexedAccess": true,
+            "typeDefinitions": {
+                "required": true,
+                "description": "所有函数参数和返回值都必须有类型定义",
+                "examples": {
+                    "valid": "function getUser(id: string): Promise<User>",
+                    "invalid": "function getUser(id) { return user; }"
+                }
+            }
+        },
+        "angular": {
+            "componentStructure": {
+                "template": "inline",
+                "style": "scss",
+                "changeDetection": "OnPush",
+                "description": "组件使用内联模板，SCSS样式，OnPush变更检测"
+            },
+            "serviceInjection": {
+                "method": "constructor",
+                "description": "服务通过构造函数注入"
+            },
+            "lifecycleHooks": {
+                "required": [
+                    "OnInit",
+                    "OnDestroy"
+                ],
+                "description": "组件必须实现OnInit和OnDestroy生命周期钩子"
+            },
+            "routing": {
+                "lazyLoading": true,
+                "guards": "required",
+                "description": "路由使用懒加载和守卫"
+            }
+        },
+        "errorHandling": {
+            "asyncOperations": {
+                "required": true,
+                "description": "异步操作必须包含错误处理",
+                "examples": {
+                    "valid": "try { const result = await operation(); } catch (error) { handleError(error); }",
+                    "invalid": "const result = await operation();"
+                }
+            },
+            "promiseChains": {
+                "catchRequired": true,
+                "description": "Promise链必须包含catch处理"
+            },
+            "errorMessages": {
+                "descriptive": true,
+                "description": "错误信息必须具有描述性"
+            }
+        },
+        "testing": {
+            "coverage": {
+                "minimum": 80,
+                "critical": 95,
+                "description": "测试覆盖率最低80%，关键业务逻辑95%"
+            },
+            "naming": {
+                "pattern": "should [expected behavior] when [condition]",
+                "description": "测试用例命名格式",
+                "examples": {
+                    "valid": "should return user when valid id is provided",
+                    "invalid": "test getUser function"
+                }
+            },
+            "structure": {
+                "arrange": true,
+                "act": true,
+                "assert": true,
+                "description": "测试使用AAA模式（Arrange-Act-Assert）"
+            }
+        },
+        "security": {
+            "inputValidation": {
+                "required": true,
+                "description": "所有用户输入都必须验证"
+            },
+            "sqlInjection": {
+                "prevention": "parameterized",
+                "description": "使用参数化查询防止SQL注入"
+            },
+            "xssProtection": {
+                "encoding": true,
+                "description": "输出数据必须进行编码"
+            },
+            "authentication": {
+                "method": "JWT",
+                "description": "使用JWT进行身份认证"
+            },
+            "authorization": {
+                "required": true,
+                "description": "敏感操作必须进行权限验证"
+            }
+        },
+        "performance": {
+            "bundleSize": {
+                "max": "2MB",
+                "description": "打包文件最大2MB"
+            },
+            "loadTime": {
+                "max": "3s",
+                "description": "首屏加载时间最大3秒"
+            },
+            "memoryUsage": {
+                "monitoring": true,
+                "description": "监控内存使用情况"
+            },
+            "optimization": {
+                "lazyLoading": true,
+                "treeShaking": true,
+                "compression": true,
+                "description": "启用懒加载、摇树优化和压缩"
+            }
+        },
+        "documentation": {
+            "jsdoc": {
+                "required": true,
+                "description": "函数必须有JSDoc注释"
+            },
+            "comments": {
+                "complexLogic": true,
+                "description": "复杂逻辑必须有注释"
+            },
+            "readme": {
+                "required": true,
+                "description": "项目必须有README文件"
+            },
+            "apiDocumentation": {
+                "required": true,
+                "format": "OpenAPI",
+                "description": "API必须有OpenAPI文档"
+            }
+        },
+        "dependencies": {
+            "versioning": {
+                "strategy": "semver",
+                "description": "使用语义化版本控制"
+            },
+            "security": {
+                "audit": true,
+                "frequency": "weekly",
+                "description": "每周进行安全审计"
+            },
+            "updates": {
+                "automatic": false,
+                "approval": "required",
+                "description": "依赖更新需要审批"
+            }
+        },
+        "git": {
+            "commitMessage": {
+                "format": "<type>(<scope>): <description>",
+                "types": [
+                    "feat",
+                    "fix",
+                    "docs",
+                    "style",
+                    "refactor",
+                    "test",
+                    "chore"
+                ],
+                "description": "提交信息格式规范"
+            },
+            "branchNaming": {
+                "feature": "feature/description",
+                "bugfix": "bugfix/description",
+                "hotfix": "hotfix/description",
+                "release": "release/version",
+                "description": "分支命名规范"
+            },
+            "workflow": {
+                "strategy": "gitflow",
+                "description": "使用Git Flow工作流"
+            }
+        }
+    },
+    "enforcement": {
+        "tools": {
+            "linting": [
+                "ESLint",
+                "TSLint"
+            ],
+            "formatting": [
+                "Prettier"
+            ],
+            "testing": [
+                "Jest",
+                "Cypress"
+            ],
+            "security": [
+                "Snyk",
+                "OWASP ZAP"
+            ],
+            "performance": [
+                "Lighthouse",
+                "WebPageTest"
+            ]
+        },
+        "ci": {
+            "required": true,
+            "checks": [
+                "lint",
+                "test",
+                "build",
+                "security"
+            ],
+            "description": "CI必须包含代码检查、测试、构建和安全扫描"
+        },
+        "preCommit": {
+            "hooks": [
+                "lint-staged",
+                "husky"
+            ],
+            "description": "提交前执行代码检查和格式化"
+        }
+    },
+    "exceptions": {
+        "legacyCode": {
+            "description": "遗留代码可以逐步重构，但新代码必须遵循规范"
+        },
+        "thirdParty": {
+            "description": "第三方库代码不受此规范约束"
+        },
+        "generated": {
+            "description": "自动生成的代码不受此规范约束"
+        }
+    },
+    "resources": {
+        "documentation": [
+            "https://angular.io/styleguide",
+            "https://typescript-eslint.io/rules/",
+            "https://prettier.io/docs/en/options.html"
+        ],
+        "tools": [
+            "https://eslint.org/",
+            "https://prettier.io/",
+            "https://jestjs.io/",
+            "https://www.cypress.io/"
+        ],
+        "training": [
+            "https://angular.io/tutorial",
+            "https://typescriptlang.org/docs/",
+            "https://rxjs.dev/guide/overview"
+        ]
+    },
+    "contact": {
+        "team": "Development Team",
+        "email": "dev-team@company.com",
+        "slack": "#development",
+        "documentation": "https://docs.company.com"
+    }
+}
