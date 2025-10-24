@@ -89,3 +89,6 @@ codeStandards:
       path: "./code-style.md"
       format: "markdown"
       priority: 4
+integrations:
+  pingcode:
+    enabled: true
